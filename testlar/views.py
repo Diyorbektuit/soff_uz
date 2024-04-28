@@ -1,17 +1,22 @@
 from django.shortcuts import render
+from requests import Response
+
 from .serializers import TestSerializer, QuestionSerializer
 from .models import Test, Question
+from rest_framework.views import APIView
 from rest_framework import generics
 # Create your views here.
 
+
 class TestsList(generics.ListAPIView):
-    queryset = Test.objects.all()
+    queryset = Test.objects.filter()
     serializer_class = TestSerializer
 
 
 class TestDetail(generics.RetrieveAPIView):
     queryset = Test.objects.all()
     serializer_class = TestSerializer
+
 
 
 class TestCreate(generics.CreateAPIView):
@@ -24,7 +29,7 @@ class TestUpdate(generics.UpdateAPIView):
     serializer_class = TestSerializer
 
 
-class TestDetele(generics.DestroyAPIView):
+class TestDelete(generics.DestroyAPIView):
     queryset = Test.objects.all()
     serializer_class = TestSerializer
 
