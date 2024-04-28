@@ -35,7 +35,9 @@ schema_view = get_schema_view(
 admin.site.site_title = "Diyorbek"
 admin.site.site_header = "Api administration"
 admin.site.index_title = "Api site administration"
+from django.conf.urls.static import static
 
+from core import settings
 
 urlpatterns = [
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
@@ -44,4 +46,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('category/', include('category.urls')),
     path('tests/', include('testlar.urls'))
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
